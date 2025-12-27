@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年元旦倒计时 - 轻松版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: 300;
+        }
+        
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 35px 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        .countdown-title {
+            font-size: 1.8rem;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .countdown-item {
+            background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%);
+            border-radius: 15px;
+            padding: 20px 15px;
+            min-width: 130px;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .countdown-item:nth-child(2) {
+            background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
+            box-shadow: 0 5px 15px rgba(161, 196, 253, 0.2);
+        }
+        
+        .countdown-item:nth-child(3) {
+            background: linear-gradient(135deg, #FFD1FF 0%, #FAD0C4 100%);
+            box-shadow: 0 5px 15px rgba(255, 209, 255, 0.2);
+        }
+        
+        .countdown-item:nth-child(4) {
+            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
+            box-shadow: 0 5px 15px rgba(132, 250, 176, 0.2);
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-number {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .countdown-label {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .greeting-container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        .greeting-title {
+            font-size: 1.6rem;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .greeting-content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #444;
+            padding: 20px;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            border-radius: 15px;
+            border-left: 5px solid #FF6B6B;
+            font-style: italic;
+        }
+        
+        .greeting-author {
+            margin-top: 15px;
+            text-align: right;
+            color: #777;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            margin-top: 20px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .heart {
+            color: #FF6B6B;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .countdown {
+                gap: 15px;
+            }
+            
+            .countdown-item {
+                min-width: 110px;
+                padding: 15px 10px;
+            }
+            
+            .countdown-number {
+                font-size: 2.5rem;
+            }
+            
+            .greeting-content {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .countdown {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                width: 45%;
+                min-width: auto;
+                margin-bottom: 10px;
+            }
+            
+            .countdown-number {
+                font-size: 2.2rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>2026年元旦倒计时</h1>
+            <p class="subtitle">轻松迎接新的一年，享受每一刻的期待</p>
+        </header>
+        
+        <div class="countdown-container">
+            <h2 class="countdown-title">距离2026年元旦还有</h2>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">天</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">小时</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">分钟</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">秒</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="greeting-container">
+            <h3 class="greeting-title">新年祝福</h3>
+            <div class="greeting-content">
+                愿你在新的一年里，<br>
+                拥有星辰大海的胸怀，<br>
+                保持简单快乐的童心，<br>
+                收获平安健康的每一天。<br>
+                2026，一切皆可期！
+            </div>
+            <div class="greeting-author">—— 送给此刻正在倒计时的你</div>
+        </div>
+        
+        <footer>
+            <p>© 2025 新年倒计时页面 | 用心制作，祝你新年快乐 <span class="heart">♥</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // 倒计时功能
+        function updateCountdown() {
+            const targetDate = new Date('2026-01-01T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            if (distance < 0) {
+                // 如果已经到了2026年元旦，显示祝福语
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                // 更新标题
+                const title = document.querySelector('.countdown-title');
+                if (title) {
+                    title.textContent = '🎉 2026年元旦快乐！ 🎉';
+                }
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // 初始化倒计时
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // 添加一些简单的交互效果
+        document.querySelectorAll('.countdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+        
+        // 页面加载完成后添加一个简单的动画
+        window.addEventListener('load', function() {
+            document.querySelector('.container').style.opacity = '0';
+            document.querySelector('.container').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.container').style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.container').style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
