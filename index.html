@@ -1,333 +1,1755 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026年元旦倒计时 - 轻松版</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        header {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            color: #666;
-            font-weight: 300;
-        }
-        
-        .countdown-container {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 35px 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        
-        .countdown-title {
-            font-size: 1.8rem;
-            color: #555;
-            margin-bottom: 25px;
-            font-weight: 400;
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .countdown-item {
-            background: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%);
-            border-radius: 15px;
-            padding: 20px 15px;
-            min-width: 130px;
-            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .countdown-item:nth-child(2) {
-            background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
-            box-shadow: 0 5px 15px rgba(161, 196, 253, 0.2);
-        }
-        
-        .countdown-item:nth-child(3) {
-            background: linear-gradient(135deg, #FFD1FF 0%, #FAD0C4 100%);
-            box-shadow: 0 5px 15px rgba(255, 209, 255, 0.2);
-        }
-        
-        .countdown-item:nth-child(4) {
-            background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
-            box-shadow: 0 5px 15px rgba(132, 250, 176, 0.2);
-        }
-        
-        .countdown-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .countdown-number {
-            font-size: 3.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #333;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-        }
-        
-        .countdown-label {
-            font-size: 1.1rem;
-            color: #555;
-            font-weight: 500;
-        }
-        
-        .greeting-container {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        
-        .greeting-title {
-            font-size: 1.6rem;
-            color: #555;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .greeting-content {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            color: #444;
-            padding: 20px;
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-            border-radius: 15px;
-            border-left: 5px solid #FF6B6B;
-            font-style: italic;
-        }
-        
-        .greeting-author {
-            margin-top: 15px;
-            text-align: right;
-            color: #777;
-            font-size: 1.1rem;
-        }
-        
-        footer {
-            margin-top: 20px;
-            padding: 20px;
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        .heart {
-            color: #FF6B6B;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-        }
-        
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .countdown {
-                gap: 15px;
-            }
-            
-            .countdown-item {
-                min-width: 110px;
-                padding: 15px 10px;
-            }
-            
-            .countdown-number {
-                font-size: 2.5rem;
-            }
-            
-            .greeting-content {
-                font-size: 1.2rem;
-                padding: 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .countdown {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .countdown-item {
-                width: 45%;
-                min-width: auto;
-                margin-bottom: 10px;
-            }
-            
-            .countdown-number {
-                font-size: 2.2rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025年度复盘 | 2025 Year in Review</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffecec 100%);
+      color: #5a2a2a;
+      padding: 15px;
+      max-width: 1000px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 云朵背景效果 */
+    .cloud {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      filter: blur(5px);
+      animation: float 20s infinite linear;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .cloud-1 {
+      width: 200px;
+      height: 60px;
+      top: 10%;
+      left: 5%;
+      animation-duration: 25s;
+      animation-delay: 0s;
+    }
+
+    .cloud-2 {
+      width: 150px;
+      height: 50px;
+      top: 25%;
+      right: 10%;
+      animation-duration: 30s;
+      animation-delay: 5s;
+    }
+
+    .cloud-3 {
+      width: 180px;
+      height: 55px;
+      bottom: 20%;
+      left: 15%;
+      animation-duration: 35s;
+      animation-delay: 10s;
+    }
+
+    .cloud-4 {
+      width: 120px;
+      height: 40px;
+      bottom: 10%;
+      right: 5%;
+      animation-duration: 28s;
+      animation-delay: 15s;
+    }
+
+    .cloud-5 {
+      width: 160px;
+      height: 50px;
+      top: 40%;
+      left: 20%;
+      animation-duration: 32s;
+      animation-delay: 7s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateX(-100px);
+      }
+      100% {
+        transform: translateX(calc(100vw + 100px));
+      }
+    }
+
+    /* 水花效果 */
+    .splash {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .splash-1 {
+      top: 15%;
+      right: 5%;
+      width: 120px;
+      height: 120px;
+    }
+
+    .splash-2 {
+      bottom: 20%;
+      left: 5%;
+      width: 80px;
+      height: 80px;
+    }
+
+    .splash-3 {
+      top: 60%;
+      right: 15%;
+      width: 100px;
+      height: 100px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding: 25px 15px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .header h2 {
+      font-size: 20px;
+      opacity: 0.9;
+      font-weight: 400;
+      margin-bottom: 5px;
+      position: relative;
+    }
+
+    .header p {
+      font-size: 15px;
+      opacity: 0.9;
+      position: relative;
+    }
+
+    .header .subtitle {
+      font-size: 16px;
+      margin-top: 5px;
+      opacity: 0.8;
+    }
+
+    /* 目录导航 */
+    .toc-container {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+    }
+
+    .toc-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ff6b6b;
+      display: flex;
+      align-items: center;
+    }
+
+    .toc-title i {
+      margin-right: 8px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .toc-item {
+      padding: 8px 12px;
+      background: #fff5f5;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .toc-item:hover {
+      background: #ff6b6b;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .toc-item i {
+      margin-right: 8px;
+      font-size: 12px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      color: white;
+      padding: 16px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .card-header i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .card-header .en {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    /* 图片上传区域 */
+    .image-upload-section {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      border: 2px dashed #e0e0e0;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .image-upload-section .image-upload-label,
+    .image-upload-section .image-upload-btn {
+      transition: all 0.3s;
+    }
+
+    .image-upload-section:hover {
+      border-color: #ff6b6b;
+      background: #fff5f5;
+    }
+
+    .image-upload-label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .image-upload-btn {
+      background: #f9f9f9;
+      color: #999;
+      border: 2px dashed #ccc;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .upload-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .image-upload-btn:hover {
+      background: #f0f0f0;
+      border: 2px dashed #999;
+      transform: translateY(-2px) scale(1.1);
+    }
+
+    .image-preview-container {
+      //margin-top: 15px;
+      display: none;
+      position: relative;
+      width: 100%;
+      max-height: 200px;
+    }
+
+    .image-preview {
+      width: 100%;
+      height: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      object-fit: contain;
+      cursor: pointer;
+    }
+
+    .remove-image {
+      background: #ff4757;
+      color: white;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 14px;
+      cursor: pointer;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .image-preview-container:hover .remove-image {
+      opacity: 1;
+    }
+
+    /* 图片放大模态框样式 */
+    .image-modal {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .close-modal:hover {
+      color: #bbb;
+    }
+
+    .question {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed #f0f0f0;
+      position: relative;
+    }
+
+    .question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .question-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      border-radius: 50%;
+      margin-right: 10px;
+      font-weight: 600;
+      color: white;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .question-text {
+      font-size: 15px;
+      color: #5a2a2a;
+      line-height: 1.5;
+      flex: 1;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .question-en {
+      font-size: 13px;
+      color: #8b5a5a;
+      margin-bottom: 8px;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .answer {
+      padding-left: 36px;
+      font-size: 14px;
+      color: #ff6b6b;
+      font-weight: 500;
+      min-height: 22px;
+      border-left: 3px solid #ffecec;
+      padding-left: 12px;
+      margin-left: 36px;
+      word-break: break-word;
+      outline: none;
+    }
+
+    .answer:empty:before {
+      content: "点击此处填写答案...";
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+      margin: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      min-width: 140px;
+    }
+
+    .btn i {
+      margin-right: 6px;
+    }
+
+    .btn:hover, .btn:active {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,107,107,0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #6c757d 0%, #8a939b 100%);
+      box-shadow: 0 5px 15px rgba(108,117,125,0.3);
+    }
+
+    .btn-secondary:hover, .btn-secondary:active {
+      box-shadow: 0 8px 20px rgba(108,117,125,0.4);
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+    }
+
+    .btn-download:hover, .btn-download:active {
+      box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+    }
+
+    .btn-clear {
+      background: linear-gradient(135deg, #ff9f43 0%, #feca57 100%);
+      box-shadow: 0 5px 15px rgba(255, 159, 67, 0.3);
+    }
+
+    .btn-clear:hover, .btn-clear:active {
+      box-shadow: 0 8px 20px rgba(255, 159, 67, 0.4);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+      z-index: 100;
+      transition: all 0.3s;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255,107,107,0.5);
+    }
+
+    .tip {
+      text-align: center;
+      margin-top: 20px;
+      color: #8b5a5a;
+      font-size: 13px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 12px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .download-section {
+      text-align: center;
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      display: none;
+    }
+
+    .download-section.active {
+      display: block;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .download-btn {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+    }
+
+    .download-btn i {
+      margin-right: 5px;
+    }
+
+    .download-btn:hover, .download-btn:active {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      font-size: 11px;
+      color: rgba(90, 42, 42, 0.2);
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 15px 0;
+      color: #ff6b6b;
+    }
+
+    .loading i {
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .reset-section {
+      text-align: center;
+      margin: 30px 0 20px;
+    }
+
+    .reset-text {
+      font-size: 16px;
+      color: #5a2a2a;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .reset-subtext {
+      font-size: 12px;
+      color: #8b5a5a;
+      margin-bottom: 15px;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .header {
+        padding: 20px 12px;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .header h2 {
+        font-size: 18px;
+      }
+
+      .toc-container {
+        padding: 12px;
+      }
+
+      .toc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-header {
+        padding: 14px 16px;
+        font-size: 16px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .question {
+        margin-bottom: 14px;
+        padding-bottom: 14px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 5px auto;
+        display: block;
+      }
+
+      .download-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .download-btn {
+        width: 100%;
+        max-width: 250px;
+      }
+
+      .question-en {
+        font-size: 12px;
+      }
+
+      .cloud {
+        display: none;
+      }
+
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 22px;
+      }
+
+      .header h2 {
+        font-size: 16px;
+      }
+
+      .header p {
+        font-size: 14px;
+      }
+
+      .card-header {
+        font-size: 15px;
+      }
+
+      .question-text {
+        font-size: 14px;
+      }
+
+      .answer {
+        font-size: 13px;
+      }
+
+      .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>2026年元旦倒计时</h1>
-            <p class="subtitle">轻松迎接新的一年，享受每一刻的期待</p>
-        </header>
-        
-        <div class="countdown-container">
-            <h2 class="countdown-title">距离2026年元旦还有</h2>
-            <div class="countdown">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">天</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">小时</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">分钟</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">秒</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="greeting-container">
-            <h3 class="greeting-title">新年祝福</h3>
-            <div class="greeting-content">
-                愿你在新的一年里，<br>
-                拥有星辰大海的胸怀，<br>
-                保持简单快乐的童心，<br>
-                收获平安健康的每一天。<br>
-                2026，一切皆可期！
-            </div>
-            <div class="greeting-author">—— 送给此刻正在倒计时的你</div>
-        </div>
-        
-        <footer>
-            <p>© 2025 新年倒计时页面 | 用心制作，祝你新年快乐 <span class="heart">♥</span></p>
-        </footer>
-    </div>
+<!-- 云朵背景 -->
+<div class="cloud cloud-1"></div>
+<div class="cloud cloud-2"></div>
+<div class="cloud cloud-3"></div>
+<div class="cloud cloud-4"></div>
+<div class="cloud cloud-5"></div>
 
-    <script>
-        // 倒计时功能
-        function updateCountdown() {
-            const targetDate = new Date('2026-01-01T00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+<!-- 水花效果 -->
+<div class="splash splash-1"></div>
+<div class="splash splash-2"></div>
+<div class="splash splash-3"></div>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTop">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- 图片放大模态框 -->
+<div id="imageModal" class="image-modal" style="display: none;">
+  <span class="close-modal" id="closeModal">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<div class="header">
+  <h1>2025年度复盘 · 40问</h1>
+  <h2>2025 Year in Review · 40 Questions</h2>
+  <p>向内成长，向外探索</p>
+  <p class="subtitle">Inner Growth, Outer Exploration</p>
+</div>
+
+<!-- 目录导航 -->
+<div class="toc-container">
+  <div class="toc-title">
+    <i class="fas fa-list"></i>快速导航
+  </div>
+  <div class="toc-grid">
+    <div class="toc-item" data-target="card1">
+      <i class="fas fa-seedling"></i>Part 1: 成长与突破
+    </div>
+    <div class="toc-item" data-target="card2">
+      <i class="fas fa-home"></i>Part 2: 生活与烟火
+    </div>
+    <div class="toc-item" data-target="card3">
+      <i class="fas fa-users"></i>Part 3: 连接与回声
+    </div>
+    <div class="toc-item" data-target="card4">
+      <i class="fas fa-calendar-alt"></i>Part 4: 足迹与展望
+    </div>
+  </div>
+</div>
+
+<div class="loading" id="loadingIndicator">
+  <i class="fas fa-spinner"></i>正在生成图片，请稍候...
+</div>
+
+<div class="container">
+  <!-- Part 1 卡片 -->
+  <div class="card" id="card1">
+    <div class="card-header">
+      <i class="fas fa-seedling"></i>
+      <span>Part 1: 成长与突破 · 向内审视</span>
+      <span class="en">Growth & Breakthrough · Inner Reflection</span>
+    </div>
+    <div class="card-content">
+      <!-- 图片上传区域 -->
+      <div class="image-upload-section" id="imageUpload1">
+        <label class="image-upload-label">上传一张最能代表这个模块的照片</label>
+        <input type="file" id="fileInput1" accept="image/*" style="display: none;">
+        <div class="image-upload-btn" onclick="document.getElementById('fileInput1').click()">
+          <span class="upload-icon">+</span>
+        </div>
+        <div class="image-preview-container" id="previewContainer1">
+          <img class="image-preview" id="previewImage1" src="" alt="预览图片">
+          <button class="remove-image" onclick="removeImage(1)">×</button>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">1</span>
+          <div class="question-text">今年，你迈出的最勇敢的一步是什么？</div>
+        </div>
+        <div class="question-en">What was the bravest step you took this year?</div>
+        <div class="answer" contenteditable="true">把论文投出去了，虽然收到了拒稿</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">2</span>
+          <div class="question-text">你坚持最久的一个习惯是什么？它给你带来了什么改变？</div>
+        </div>
+        <div class="question-en">What's the longest habit you've maintained? How has it changed you?</div>
+        <div class="answer" contenteditable="true">坚持健康计划，让我感觉更有活力</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">3</span>
+          <div class="question-text">今年，哪个瞬间让你觉得自己"真的成长了"？</div>
+        </div>
+        <div class="question-en">Which moment made you feel you've "truly grown" this year?</div>
+        <div class="answer" contenteditable="true">9月底开始健康计划的那一刻</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">4</span>
+          <div class="question-text">你最大的收获是什么？（可以不是物质上的）</div>
+        </div>
+        <div class="question-en">What's your biggest gain this year? (Could be non-material)</div>
+        <div class="answer" contenteditable="true">学会了更好地管理时间和健康</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">5</span>
+          <div class="question-text">遭遇最大的挑战是什么？你是如何应对的？</div>
+        </div>
+        <div class="question-en">What was your biggest challenge? How did you handle it?</div>
+        <div class="answer" contenteditable="true">论文修改无数次，通过坚持和寻求帮助克服了</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">6</span>
+          <div class="question-text">你放下了哪些不再服务于你的执念或事物？</div>
+        </div>
+        <div class="question-en">What obsessions or things no longer serving you have you let go of?</div>
+        <div class="answer" contenteditable="true">过度关注他人评价，学会更专注于自己</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">7</span>
+          <div class="question-text">你对自己有了什么新的认识？</div>
+        </div>
+        <div class="question-en">What new understanding have you gained about yourself?</div>
+        <div class="answer" contenteditable="true">我比想象中更有韧性</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">8</span>
+          <div class="question-text">你为"健康"这项重要投资，做了哪些努力？</div>
+        </div>
+        <div class="question-en">What efforts have you made for your health as an important investment?</div>
+        <div class="answer" contenteditable="true">定期运动，改善饮食，保证充足睡眠</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">9</span>
+          <div class="question-text">如果可以向年中的自己说一句话，你会说什么？</div>
+        </div>
+        <div class="question-en">If you could say one thing to your mid-year self, what would it be?</div>
+        <div class="answer" contenteditable="true">坚持下去，你会感谢现在的自己</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">10</span>
+          <div class="question-text">你完成了哪些年初不敢想象的事？</div>
+        </div>
+        <div class="question-en">What have you accomplished that you couldn't imagine at the beginning of the year?</div>
+        <div class="answer" contenteditable="true">完成了法务实习，成功投出论文</div>
+      </div>
+    </div>
+    <div class="watermark">2025年度复盘</div>
+  </div>
+
+  <!-- Part 2 卡片 -->
+  <div class="card" id="card2">
+    <div class="card-header">
+      <i class="fas fa-home"></i>
+      <span>Part 2: 生活与烟火 · 日常浪漫</span>
+      <span class="en">Life & Moments · Daily Romance</span>
+    </div>
+    <div class="card-content">
+      <!-- 图片上传区域 -->
+      <div class="image-upload-section" id="imageUpload2">
+        <label class="image-upload-label">上传一张最能代表这个模块的照片</label>
+        <input type="file" id="fileInput2" accept="image/*" style="display: none;">
+        <div class="image-upload-btn" onclick="document.getElementById('fileInput2').click()">
+          <span class="upload-icon">+</span>
+        </div>
+        <div class="image-preview-container" id="previewContainer2">
+          <img class="image-preview" id="previewImage2" src="" alt="预览图片">
+          <button class="remove-image" onclick="removeImage(2)">×</button>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">11</span>
+          <div class="question-text">今年让你感到最治愈的一个场景或瞬间是？</div>
+        </div>
+        <div class="question-en">What was the most healing scene or moment for you this year?</div>
+        <div class="answer" contenteditable="true">周末早晨阳光透过窗帘洒在书桌上</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">12</span>
+          <div class="question-text">你为生活增添幸福感购买的"最佳单品"是？</div>
+        </div>
+        <div class="question-en">What's the "best item" you bought to increase happiness in your life?</div>
+        <div class="answer" contenteditable="true">新手机，记录生活更方便了</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">13</span>
+          <div class="question-text">哪顿饭是你今年的"味觉高光时刻"？</div>
+        </div>
+        <div class="question-en">Which meal was your "taste highlight" of the year?</div>
+        <div class="answer" contenteditable="true">和朋友一起尝试的新餐厅的创意菜</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">14</span>
+          <div class="question-text">你发掘了什么新的兴趣爱好？它带给你什么乐趣？</div>
+        </div>
+        <div class="question-en">What new hobbies have you discovered? What joy do they bring you?</div>
+        <div class="answer" contenteditable="true">打羽毛球，让我释放压力，结交新朋友</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">15</span>
+          <div class="question-text">你到过的哪个地方让你念念不忘？</div>
+        </div>
+        <div class="question-en">Which place you visited left a lasting impression on you?</div>
+        <div class="answer" contenteditable="true">那个有湖有山的郊野公园</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">16</span>
+          <div class="question-text">今年，是什么小事让你重复感到快乐？</div>
+        </div>
+        <div class="question-en">What small thing repeatedly brought you joy this year?</div>
+        <div class="answer" contenteditable="true">每天早晨的一杯手冲咖啡</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">17</span>
+          <div class="question-text">你大部分的钱都花在了哪里？对此你感觉如何？</div>
+        </div>
+        <div class="question-en">Where did you spend most of your money? How do you feel about it?</div>
+        <div class="answer" contenteditable="true">吃、文具、新衣服，感觉值得</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">18</span>
+          <div class="question-text">你希望自己明年花更多时间在什么事上？</div>
+        </div>
+        <div class="question-en">What do you hope to spend more time on next year?</div>
+        <div class="answer" contenteditable="true">多读书，多出门，多支配自己的时间</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">19</span>
+          <div class="question-text">你希望自己明年能减少做什么事？</div>
+        </div>
+        <div class="question-en">What do you hope to do less of next year?</div>
+        <div class="answer" contenteditable="true">少玩手机，少关注比较</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">20</span>
+          <div class="question-text">与去年相比，你是更快乐/更悲伤？更瘦/更胖？更富/更穷？</div>
+        </div>
+        <div class="question-en">Compared to last year, are you happier/sadder? Thinner/fatter? Richer/poorer?</div>
+        <div class="answer" contenteditable="true">更快乐，更健康，内心更富有</div>
+      </div>
+    </div>
+    <div class="watermark">2025年度复盘</div>
+  </div>
+
+  <!-- Part 3 卡片 -->
+  <div class="card" id="card3">
+    <div class="card-header">
+      <i class="fas fa-users"></i>
+      <span>Part 3: 连接与回声 · 人与社会</span>
+      <span class="en">Connections & Echoes · People & Society</span>
+    </div>
+    <div class="card-content">
+      <!-- 图片上传区域 -->
+      <div class="image-upload-section" id="imageUpload3">
+        <label class="image-upload-label">上传一张最能代表这个模块的照片</label>
+        <input type="file" id="fileInput3" accept="image/*" style="display: none;">
+        <div class="image-upload-btn" onclick="document.getElementById('fileInput3').click()">
+          <span class="upload-icon">+</span>
+        </div>
+        <div class="image-preview-container" id="previewContainer3">
+          <img class="image-preview" id="previewImage3" src="" alt="预览图片">
+          <button class="remove-image" onclick="removeImage(3)">×</button>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">21</span>
+          <div class="question-text">今年，你最想感谢的人是谁？为什么？</div>
+        </div>
+        <div class="question-en">Who are you most grateful for this year? Why?</div>
+        <div class="answer" contenteditable="true">我自己，因为坚持下来了</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">22</span>
+          <div class="question-text">在新认识的人中，谁为你带来了新的视角或能量？</div>
+        </div>
+        <div class="question-en">Among new acquaintances, who brought you new perspectives or energy?</div>
+        <div class="answer" contenteditable="true">实习时认识的导师，给了我很多职业建议</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">23</span>
+          <div class="question-text">你从朋友或家人身上，重新学到了什么美好的品质？</div>
+        </div>
+        <div class="question-en">What beautiful qualities have you relearned from friends or family?</div>
+        <div class="answer" contenteditable="true">妈妈的耐心和坚韧</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">24</span>
+          <div class="question-text">你今年给予或接收到的最珍贵的帮助/礼物是什么？</div>
+        </div>
+        <div class="question-en">What was the most precious help/gift you gave or received this year?</div>
+        <div class="answer" contenteditable="true">朋友在我低谷时的陪伴和鼓励</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">25</span>
+          <div class="question-text">你如何度过了今年最有意义的节假日？</div>
+        </div>
+        <div class="question-en">How did you spend the most meaningful holiday this year?</div>
+        <div class="answer" contenteditable="true">和家人一起简单吃饭聊天</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">26</span>
+          <div class="question-text">你为所在的社区/圈子贡献了哪些微小的价值？</div>
+        </div>
+        <div class="question-en">What small value have you contributed to your community/circle?</div>
+        <div class="answer" contenteditable="true">在社交媒体分享有用的学习经验</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">27</span>
+          <div class="question-text">你通过什么方式保持了与远方朋友的联结？</div>
+        </div>
+        <div class="question-en">How have you maintained connections with distant friends?</div>
+        <div class="answer" contenteditable="true">定期视频通话，分享生活近况</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">28</span>
+          <div class="question-text">你关注到的哪个社会/文化议题最让你有所触动？</div>
+        </div>
+        <div class="question-en">Which social/cultural issue touched you the most?</div>
+        <div class="answer" contenteditable="true">年轻人心理健康问题</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">29</span>
+          <div class="question-text">你觉得自己今年在"关系"的处理上有何进步？</div>
+        </div>
+        <div class="question-en">How have you improved in handling relationships this year?</div>
+        <div class="answer" contenteditable="true">学会了更好地表达自己的需求</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">30</span>
+          <div class="question-text">你今年是否生过病或受过伤？如何恢复的？</div>
+        </div>
+        <div class="question-en">Did you get sick or injured this year? How did you recover?</div>
+        <div class="answer" contenteditable="true">有小病，通过休息和调整生活习惯恢复</div>
+      </div>
+    </div>
+    <div class="watermark">2025年度复盘</div>
+  </div>
+
+  <!-- Part 4 卡片 -->
+  <div class="card" id="card4">
+    <div class="card-header">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Part 4: 足迹与展望 · 过去与未来</span>
+      <span class="en">Footprints & Outlook · Past & Future</span>
+    </div>
+    <div class="card-content">
+      <!-- 图片上传区域 -->
+      <div class="image-upload-section" id="imageUpload4">
+        <label class="image-upload-label">上传一张最能代表这个模块的照片</label>
+        <input type="file" id="fileInput4" accept="image/*" style="display: none;">
+        <div class="image-upload-btn" onclick="document.getElementById('fileInput4').click()">
+          <span class="upload-icon">+</span>
+        </div>
+        <div class="image-preview-container" id="previewContainer4">
+          <img class="image-preview" id="previewImage4" src="" alt="预览图片">
+          <button class="remove-image" onclick="removeImage(4)">×</button>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">31</span>
+          <div class="question-text">如果用一个词总结你的2025，它会是什么？</div>
+        </div>
+        <div class="question-en">If you had to summarize your 2025 in one word, what would it be?</div>
+        <div class="answer" contenteditable="true">成长</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">32</span>
+          <div class="question-text">你生日那天做了什么？</div>
+        </div>
+        <div class="question-en">What did you do on your birthday?</div>
+        <div class="answer" contenteditable="true">和好友简单庆祝，反思了一年的成长</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">33</span>
+          <div class="question-text">你的"个人时尚风格"有了什么新变化？</div>
+        </div>
+        <div class="question-en">How has your personal fashion style evolved?</div>
+        <div class="answer" contenteditable="true">更加简约舒适，注重质感</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">34</span>
+          <div class="question-text">是什么让你保持理智？</div>
+        </div>
+        <div class="question-en">What keeps you grounded?</div>
+        <div class="answer" contenteditable="true">写日记和定期运动</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">35</span>
+          <div class="question-text">你学到的"最宝贵的人生经验"是什么？</div>
+        </div>
+        <div class="question-en">What's the "most valuable life lesson" you've learned?</div>
+        <div class="answer" contenteditable="true">过程比结果更重要</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">36</span>
+          <div class="question-text">有什么是你非常想要且最终得到的？</div>
+        </div>
+        <div class="question-en">What did you really want and eventually get?</div>
+        <div class="answer" contenteditable="true">更健康的生活方式和内心的平静</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">37</span>
+          <div class="question-text">有什么是你想要却未得的？</div>
+        </div>
+        <div class="question-en">What did you want but not get?</div>
+        <div class="answer" contenteditable="true">论文顺利发表，不过还在努力中</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">38</span>
+          <div class="question-text">如果有一件事能让2025年更圆满，它是什么？</div>
+        </div>
+        <div class="question-en">If one thing could make 2025 more complete, what would it be?</div>
+        <div class="answer" contenteditable="true">论文能够顺利发表</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">39</span>
+          <div class="question-text">站在2025的尾巴上，你感到更______了？</div>
+        </div>
+        <div class="question-en">At the end of 2025, you feel more ______?</div>
+        <div class="answer" contenteditable="true">平静和坚定</div>
+      </div>
+      <div class="question">
+        <div class="question-header">
+          <span class="question-number">40</span>
+          <div class="question-text">对2026年的自己，许下一个最重要的承诺或期望。</div>
+        </div>
+        <div class="question-en">Make one important promise or expectation for your 2026 self.</div>
+        <div class="answer" contenteditable="true">继续保持健康的生活方式，勇敢尝试新事物</div>
+      </div>
+    </div>
+    <div class="watermark">2025年度复盘</div>
+  </div>
+</div>
+
+<!-- 生成按钮区域 -->
+<div class="controls">
+  <button class="btn" id="generateBtn">
+    <i class="fas fa-camera"></i>生成复盘卡片
+  </button>
+  <button class="btn btn-download" id="downloadAllBtn" style="display: none;">
+    <i class="fas fa-download"></i>下载所有卡片
+  </button>
+</div>
+
+<!-- 重置内容区域 -->
+<div class="reset-section">
+  <div class="reset-text">开始你的复盘之旅吧</div>
+  <div class="reset-subtext">Begin Your Review Journey</div>
+  <button class="btn btn-clear" id="clearBtn">
+    <i class="fas fa-eraser"></i>清空内容
+  </button>
+</div>
+
+<div class="download-section" id="downloadSection">
+  <h3>图片生成完成！</h3>
+  <p>点击下方按钮下载对应的卡片图片</p>
+  <div class="download-buttons">
+    <button class="download-btn" id="downloadCard1">
+      <i class="fas fa-download"></i>下载卡片1
+    </button>
+    <button class="download-btn" id="downloadCard2">
+      <i class="fas fa-download"></i>下载卡片2
+    </button>
+    <button class="download-btn" id="downloadCard3">
+      <i class="fas fa-download"></i>下载卡片3
+    </button>
+    <button class="download-btn" id="downloadCard4">
+      <i class="fas fa-download"></i>下载卡片4
+    </button>
+  </div>
+</div>
+
+<div class="tip">
+  <p><i class="fas fa-lightbulb"></i> 提示：点击答案区域可以直接编辑内容，完成后点击"生成复盘卡片"</p>
+</div>
+
+<script>
+  // 存储生成的图片数据
+  let cardImages = {};
+
+  // 页面加载完成后初始化
+  document.addEventListener('DOMContentLoaded', function() {
+    // 初始化图片上传功能
+    initImageUpload();
+
+    // 初始化目录导航
+    initTocNavigation();
+
+    // 初始化回到顶部按钮
+    initBackToTop();
+
+    // 为模态框关闭按钮添加事件监听器
+    document.getElementById('closeModal').addEventListener('click', closeImageModal);
+    
+    // 点击模态框背景关闭图片
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeImageModal();
+      }
+    });
+
+    // 绑定按钮事件
+    document.getElementById('generateBtn').addEventListener('click', function() {
+      generateCardImages();
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', function() {
+      clearAllAnswers();
+    });
+
+    // 为每个下载按钮添加事件监听
+    document.getElementById('downloadCard1').addEventListener('click', function() {
+      downloadCard('card1', '2025年度复盘-卡片1.png');
+    });
+
+    document.getElementById('downloadCard2').addEventListener('click', function() {
+      downloadCard('card2', '2025年度复盘-卡片2.png');
+    });
+
+    document.getElementById('downloadCard3').addEventListener('click', function() {
+      downloadCard('card3', '2025年度复盘-卡片3.png');
+    });
+
+    document.getElementById('downloadCard4').addEventListener('click', function() {
+      downloadCard('card4', '2025年度复盘-卡片4.png');
+    });
+
+    document.getElementById('downloadAllBtn').addEventListener('click', function() {
+      downloadAllCards();
+    });
+
+    // 添加编辑提示
+    const answers = document.querySelectorAll('.answer');
+    answers.forEach(answer => {
+      answer.addEventListener('focus', function() {
+        this.style.backgroundColor = '#fff9db';
+        this.style.borderRadius = '5px';
+        this.style.padding = '6px';
+      });
+
+      answer.addEventListener('blur', function() {
+        this.style.backgroundColor = 'transparent';
+        this.style.padding = '0';
+      });
+    });
+  });
+
+  // 初始化图片上传功能
+  function initImageUpload() {
+    for (let i = 1; i <= 4; i++) {
+      const fileInput = document.getElementById(`fileInput${i}`);
+      const previewContainer = document.getElementById(`previewContainer${i}`);
+      const previewImage = document.getElementById(`previewImage${i}`);
+      const uploadSection = document.getElementById(`imageUpload${i}`);
+      const uploadLabel = uploadSection.querySelector('.image-upload-label');
+      const uploadBtn = uploadSection.querySelector('.image-upload-btn');
+
+      // 设置初始样式
+      previewContainer.style.display = 'none';
+
+      fileInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+
+          // 检查文件类型
+          if (!file.type.match('image.*')) {
+            alert('请选择图片文件！');
+            return;
+          }
+
+          const reader = new FileReader();
+
+          reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewContainer.style.display = 'block';
+            // 隐藏上传按钮和提示词
+            uploadLabel.style.display = 'none';
+            uploadBtn.style.display = 'none';
+            // 设置上传区域的padding为0
+            uploadSection.style.padding = '2px';
             
-            if (distance < 0) {
-                // 如果已经到了2026年元旦，显示祝福语
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                
-                // 更新标题
-                const title = document.querySelector('.countdown-title');
-                if (title) {
-                    title.textContent = '🎉 2026年元旦快乐！ 🎉';
-                }
-                return;
+            // 为预览图片添加点击事件以放大显示
+            previewImage.onclick = function() {
+              openImageModal(e.target.result);
+            };
+          };
+
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  }
+
+  // 打开图片模态框
+  function openImageModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    modalImg.src = imageSrc;
+    modal.style.display = 'flex';
+    
+    // 添加ESC键关闭模态框功能
+    document.addEventListener('keydown', closeModalHandler);
+  }
+
+  // 关闭图片模态框
+  function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    
+    // 移除ESC键监听器
+    document.removeEventListener('keydown', closeModalHandler);
+  }
+
+  // ESC键关闭模态框的事件处理器
+  function closeModalHandler(event) {
+    if (event.key === 'Escape') {
+      closeImageModal();
+    }
+  }
+
+  // 移除图片
+  function removeImage(cardNumber) {
+    const previewContainer = document.getElementById(`previewContainer${cardNumber}`);
+    const previewImage = document.getElementById(`previewImage${cardNumber}`);
+    const fileInput = document.getElementById(`fileInput${cardNumber}`);
+    const uploadSection = document.getElementById(`imageUpload${cardNumber}`);
+    const uploadLabel = uploadSection.querySelector('.image-upload-label');
+    const uploadBtn = uploadSection.querySelector('.image-upload-btn');
+
+    previewImage.src = '';
+    previewContainer.style.display = 'none';
+    fileInput.value = ''; // 清空文件输入框
+    // 显示上传按钮和提示词
+    uploadLabel.style.display = 'block';
+    uploadBtn.style.display = 'flex';
+    // 重置上传区域的padding为15px
+    uploadSection.style.padding = '15px';
+  }
+
+  // 初始化目录导航
+  function initTocNavigation() {
+    const tocItems = document.querySelectorAll('.toc-item');
+
+    tocItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        scrollToElement(targetId);
+      });
+    });
+  }
+
+  // 滚动到指定元素
+  function scrollToElement(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // 计算偏移量
+      const headerHeight = document.querySelector('.header').offsetHeight;
+      const tocHeight = document.querySelector('.toc-container').offsetHeight;
+      const offset = headerHeight + tocHeight + 20;
+
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // 初始化回到顶部按钮
+  function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+
+    // 监听滚动事件
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'flex';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    // 点击回到顶部
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // 清空所有答案
+  function clearAllAnswers() {
+    if(confirm('确定要清空所有填写的内容吗？这将会删除您输入的所有答案和上传的图片。')) {
+      // 清空答案
+      const answers = document.querySelectorAll('.answer');
+      answers.forEach(answer => {
+        answer.textContent = '';
+      });
+
+      // 清空图片
+      for (let i = 1; i <= 4; i++) {
+        removeImage(i);
+      }
+
+      // 隐藏下载区域
+      document.getElementById('downloadSection').classList.remove('active');
+      document.getElementById('downloadAllBtn').style.display = 'none';
+
+      // 清空卡片图片缓存
+      cardImages = {};
+
+      alert('内容已清空！现在您可以开始填写您的2025年度复盘了。');
+    }
+  }
+
+  // 生成卡片图片
+  function generateCardImages() {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadAllBtn = document.getElementById('downloadAllBtn');
+    const downloadSection = document.getElementById('downloadSection');
+
+    // 显示加载指示器
+    loadingIndicator.style.display = 'block';
+    generateBtn.disabled = true;
+
+    // 隐藏下载区域
+    downloadSection.classList.remove('active');
+
+    // 确保所有图片都已加载
+    const imagePromises = [];
+    for (let i = 1; i <= 4; i++) {
+      const previewImage = document.getElementById(`previewImage${i}`);
+      if (previewImage && previewImage.src) {
+        imagePromises.push(new Promise(resolve => {
+          if (previewImage.complete) {
+            resolve();
+          } else {
+            previewImage.onload = resolve;
+            previewImage.onerror = resolve;
+          }
+        }));
+      }
+    }
+
+    // 等待图片加载完成后再生成卡片
+    Promise.all(imagePromises).then(() => {
+      // 生成四张卡片的图片
+      const cardPromises = [
+        generateCardImage('card1'),
+        generateCardImage('card2'),
+        generateCardImage('card3'),
+        generateCardImage('card4')
+      ];
+
+      Promise.all(cardPromises)
+        .then(results => {
+          // 存储图片数据
+          cardImages = {
+            card1: results[0],
+            card2: results[1],
+            card3: results[2],
+            card4: results[3]
+          };
+
+          // 隐藏加载指示器
+          loadingIndicator.style.display = 'none';
+          generateBtn.disabled = false;
+
+          // 显示下载所有按钮和下载区域
+          downloadAllBtn.style.display = 'inline-flex';
+          downloadSection.classList.add('active');
+
+          // 滚动到下载区域
+          downloadSection.scrollIntoView({ behavior: 'smooth' });
+        })
+        .catch(error => {
+          console.error('生成图片时出错:', error);
+          loadingIndicator.style.display = 'none';
+          generateBtn.disabled = false;
+          alert('生成图片时出现错误，请重试。');
+        });
+    });
+  }
+
+  // 生成单个卡片的图片
+  function generateCardImage(cardId) {
+    return new Promise((resolve, reject) => {
+      // 获取卡片编号
+      const cardNumber = cardId.replace('card', '');
+      const uploadSection = document.getElementById(`imageUpload${cardNumber}`);
+      const previewContainer = document.getElementById(`previewContainer${cardNumber}`);
+      const previewImage = document.getElementById(`previewImage${cardNumber}`);
+      
+      // 如果没有上传图片，则临时隐藏上传区域
+      const shouldHideUploadSection = previewContainer.style.display !== 'block';
+      if (shouldHideUploadSection) {
+        uploadSection.style.display = 'none';
+      }
+
+      const cardElement = document.getElementById(cardId);
+
+      // 确保图片在生成前已完全加载
+      const images = cardElement.getElementsByTagName('img');
+      let loadedImages = 0;
+      const totalImages = images.length;
+
+      if (totalImages === 0) {
+        captureCard();
+      } else {
+        for (let i = 0; i < totalImages; i++) {
+          if (images[i].complete) {
+            loadedImages++;
+          } else {
+            images[i].onload = function() {
+              loadedImages++;
+              if (loadedImages === totalImages) {
+                captureCard();
+              }
+            };
+            images[i].onerror = function() {
+              loadedImages++;
+              if (loadedImages === totalImages) {
+                captureCard();
+              }
+            };
+          }
+        }
+
+        if (loadedImages === totalImages) {
+          captureCard();
+        }
+      }
+
+      function captureCard() {
+        html2canvas(cardElement, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#ffffff',
+          onclone: function(clonedDoc) {
+            // 确保克隆的文档中图片也正确显示
+            const clonedImages = clonedDoc.querySelectorAll('img');
+            for (let i = 0; i < clonedImages.length; i++) {
+              if (images[i] && images[i].src) {
+                clonedImages[i].src = images[i].src;
+              }
             }
             
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // 确保克隆的图片保持原始宽高比
+            const imagePreviewElements = clonedDoc.querySelectorAll('.image-preview');
+            for (let i = 0; i < imagePreviewElements.length; i++) {
+              imagePreviewElements[i].style.objectFit = 'contain';
+              // 确保图片容器不会强制改变图片比例
+              imagePreviewElements[i].style.width = '100%';
+              imagePreviewElements[i].style.height = '100%';
+              imagePreviewElements[i].style.maxHeight = '200px';
+            }
             
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        // 初始化倒计时
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // 添加一些简单的交互效果
-        document.querySelectorAll('.countdown-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-        
-        // 页面加载完成后添加一个简单的动画
-        window.addEventListener('load', function() {
-            document.querySelector('.container').style.opacity = '0';
-            document.querySelector('.container').style.transform = 'translateY(20px)';
-            
+            // 确保图片预览容器样式正确
+            const imagePreviewContainers = clonedDoc.querySelectorAll('.image-preview-container');
+            for (let i = 0; i < imagePreviewContainers.length; i++) {
+              // 只有当容器显示时才调整样式
+              if (imagePreviewContainers[i].style.display !== 'none') {
+                imagePreviewContainers[i].style.display = 'block';
+              }
+            }
+          }
+        }).then(canvas => {
+          // 生成完图片后，如果之前隐藏了上传区域，则恢复显示
+          if (shouldHideUploadSection) {
             setTimeout(() => {
-                document.querySelector('.container').style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                document.querySelector('.container').style.opacity = '1';
-                document.querySelector('.container').style.transform = 'translateY(0)';
+              uploadSection.style.display = 'block';
+            }, 100); // 延迟恢复显示，确保图片生成完成
+          }
+          resolve(canvas.toDataURL('image/png'));
+        }).catch(error => {
+          // 即使出错也要恢复显示
+          if (shouldHideUploadSection) {
+            setTimeout(() => {
+              uploadSection.style.display = 'block';
             }, 100);
+          }
+          reject(error);
         });
-    </script>
+      }
+    });
+  }
+
+  // 下载单个卡片
+  function downloadCard(cardId, filename) {
+    if (cardImages[cardId]) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = cardImages[cardId];
+      link.click();
+    } else {
+      alert('请先生成卡片图片');
+    }
+  }
+
+  // 下载所有卡片
+  function downloadAllCards() {
+    if (Object.keys(cardImages).length === 0) {
+      alert('请先生成卡片图片');
+      return;
+    }
+
+    const zip = new JSZip();
+    zip.file("2025年度复盘-卡片1.png", cardImages.card1.split('base64,')[1], {base64: true});
+    zip.file("2025年度复盘-卡片2.png", cardImages.card2.split('base64,')[1], {base64: true});
+    zip.file("2025年度复盘-卡片3.png", cardImages.card3.split('base64,')[1], {base64: true});
+    zip.file("2025年度复盘-卡片4.png", cardImages.card4.split('base64,')[1], {base64: true});
+
+    zip.generateAsync({type: "blob"})
+      .then(function(content) {
+        const link = document.createElement('a');
+        link.download = '2025年度复盘卡片合集.zip';
+        link.href = URL.createObjectURL(content);
+        link.click();
+      });
+  }
+</script>
 </body>
 </html>
